@@ -1,26 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# SetUp Process for Nginx on a server
 
-# Update the package list
-sudo apt-get update
-
-# Install Nginx with the -y flag to automatically confirm installation
-sudo apt-get install -y nginx
-
-# Make sure Nginx is running
-sudo service nginx start
-
-# Create a default configuration file for Nginx
-sudo echo "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _;
-
-    location / {
-        echo 'Holberton School for the win!';
-        root /var/www/html;
-    }
-}" > /etc/nginx/sites-available/default
-
-# Reload Nginx to apply the changes
-sudo service nginx reload
+apt-get -y update
+apt-get -y install nginx
+ufw enable
+ufw allow 'Nginx HTTP'
+echo "Holberton School" > /var/www/html/index.html
+service nginx restart
